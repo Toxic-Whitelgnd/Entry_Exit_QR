@@ -1,0 +1,7 @@
+Name	tarun
+USN	20BTRCA030
+Branch	CSE-AI
+sem	3
+Year	2
+emailid	20btrca030@jainuniversity.ac.in
+Mobileno	1234567890

@@ -1,0 +1,7 @@
+Name	raj
+USN	20btrae23
+Branch	ae
+sem	3
+Year	2
+emailid	20btrae23@jainuniversity.ac.in
+Mobileno	23434645

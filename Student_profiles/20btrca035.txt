@@ -1,0 +1,7 @@
+Name	hari
+USN	20btrca035
+Branch	cse-ai
+sem	3
+Year	2
+emailid	20btrca035@jainuniversity.ac.in
+Mobileno	235345757
