@@ -8,16 +8,18 @@ from datetime import datetime
 from PIL import Image
 import numpy as np
 
+#create seprate firebase console and add u r firebaseconfiguration
+#i removed due to Privacy Reasons
 
 firebaseConfig = {
-    'apiKey': "AIzaSyBmy71aLIDAN87gm3JAMIqRWq57dRPfceE",
-    'authDomain': "entryexitlog.firebaseapp.com",
-    'projectId': "entryexitlog",
-    'storageBucket': "entryexitlog.appspot.com",
-    'messagingSenderId': "573883830371",
-    'appId': "1:573883830371:web:1b3f0dba7a23945b7c6856",
-    'measurementId': "G-2VM7YZ0BPE",
-    'databaseURL':"https://entryexitlog-default-rtdb.firebaseio.com"
+    'apiKey': "",
+    'authDomain': "",
+    'projectId': "",
+    'storageBucket': "",
+    'messagingSenderId': "",
+    'appId': "",
+    'measurementId': "",
+    'databaseURL':""
 }
 
 firebase = pyrebase.initialize_app(firebaseConfig)
