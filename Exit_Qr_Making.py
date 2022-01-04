@@ -60,30 +60,18 @@ def check_usn(stud_usn_check):
         b = 'In*Time'
         if b in stud_dict.keys():
             print("Present")
+            inactive_db()
+
 
         else:
             print("Not present")
             active = 1
             active_db_key = stud_dict.get("Key")
             active_db(stud_usn_check, active_db_key)
-            
 
+        #after it will be empty and so we can define new Dictionary to check!
+        stud_dict = {}
 
-
-
-    print(len(stud_key_list))
-    for i in range(len(stud_key_list)):
-        print(stud_key_list[i])
-
-        print("keys in list of loop")
-
-
-    if(users.val() != None):
-        print("Came here in the if loop")
-        #Exitqr(stud_usn_check)
-
-    else:
-        print(" OOPS Sorry U didn't make any Entry!!")
 
 
 def active_db(stud_fk_usn,stud_fk_key):
@@ -91,6 +79,10 @@ def active_db(stud_fk_usn,stud_fk_key):
     print(stud_fk_key,stud_fk_usn)
     #need to  satrt code from here
     Exitqr(stud_fk_usn,stud_fk_key)
+
+def inactive_db():
+    print("All Database are Inactive:")
+    print("So you Didn't Make Any Entry!! ;]")
 
 
 
