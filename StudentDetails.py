@@ -7,6 +7,7 @@ import string
 import random
 from pathlib import Path
 from datetime import datetime, time
+from Exit_Qr_Making import *
 
 regex = '^[a-z0-9]+[\._]?[ a-z0-9]+[@]\w+[. ]\w{2,3}$'
 firebaseConfig = {
@@ -106,8 +107,9 @@ def student_profile():
 
     print(stud_db_acc_dict)
 
-    print("Make Qr code:??")
-    ch = int(input("1 or 0:"))
+    print("Make a QR for Entry//")
+    print("Make a QR for Exit//")
+    ch = int(input("1 or 2:"))
     if(ch == 1):
         # name usn branch sem
 
@@ -129,13 +131,19 @@ def student_profile():
         stud_db_acc_dict["time*day"] = stud_reason_time
 
         # adding the date and time to dictionary
-        stud_db_acc_dict["Date"] = stud_date
-        stud_db_acc_dict["Out_Time"] = stud_time
+        stud_db_acc_dict["Out*Date"] = stud_date
+        stud_db_acc_dict["Out*Time"] = stud_time
 
         # after inserting date and time
-        print(stud_db_acc_dict)
 
 
+        S = 12  # number of characters in the string.
+        # call random.choices() string module to find the string in Uppercase + numeric data.
+        ran = ''.join(random.choices(string.ascii_uppercase + string.digits, k=S))
+        print("The randomly generated string is : " + str(ran))
+
+
+        stud_db_acc_dict["Key"] = ran
 
         print(stud_db_acc_dict)
 
@@ -152,7 +160,7 @@ def student_profile():
         stud_qr_random.add_data(stud_db_acc_dict)
         stud_qr_random.make(fit=True)
         stud_qrrr=stud_qr_random.make_image(fill_color='black',back_color='blue')
-        stud_QR=stud_qrrr.save(r'C:\Users\HOME\PycharmProjects\TryingNew Project\Students_generated_qrcodes\random.png')
+        stud_QR=stud_qrrr.save(r'C:\Users\HOME\PycharmProjects\TryingNew Project\Students_generated_qrcodes\Entry.png')
         print("Random QR had made successfully")
 
         # for file in Path(file_source).glob(stud_QR):
@@ -164,8 +172,9 @@ def student_profile():
 
 
     else:
-        print("thanks for visiting")
-
+        print("Entered in Exit_Qr")
+        check_usn(stud_id_usn)
+        #Exitqr(stud_id_usn)
 
 def student_details():
     stud_name = input("Enter a name:")
@@ -226,19 +235,7 @@ def student_details():
                     print("File already Existed in the folder")
 
 
-    '''a=input("Want to view the profile and save the file? y or n :")
-    if(a == 'y' or 'Y'):
-        for x,y in stud_usn.items():
-            print(stud_usn[x])
-            stud_usn_filename = str(stud_usn_temp)
-            f = open(stud_usn_filename+".txt",'a')
-            #f.write(x)
-            #f.write('\t')
-            f.write(y)
-            f.write('\n')
-            f.close()
-    else:
-        print(';}')'''
+
 
 
     print("Successfully Created the profile!!")
