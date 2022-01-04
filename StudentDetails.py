@@ -10,15 +10,18 @@ from datetime import datetime, time
 from Exit_Qr_Making import *
 
 regex = '^[a-z0-9]+[\._]?[ a-z0-9]+[@]\w+[. ]\w{2,3}$'
+#create seprate firebase console and add u r firebaseconfiguration
+#i removed due to Privacy Reasons
+
 firebaseConfig = {
-  'apiKey': "AIzaSyBX2uZdHQF9N__6Hkxipcbt5nwo5LUWhqU",
-  'authDomain': "tryingnewproject.firebaseapp.com",
-  'databaseURL': "https://tryingnewproject-default-rtdb.firebaseio.com",
-  'projectId': "tryingnewproject",
-  'storageBucket': "tryingnewproject.appspot.com",
-  'messagingSenderId': "988075396346",
-  'appId': "1:988075396346:web:32538a58f2bec61249cd43",
-  'measurementId': "G-SF9PHKFGLB"
+    'apiKey': "",
+    'authDomain': "",
+    'projectId': "",
+    'storageBucket': "",
+    'messagingSenderId': "",
+    'appId': "",
+    'measurementId': "",
+    'databaseURL':""
 }
 firebase = pyrebase.initialize_app(firebaseConfig)
 
@@ -32,6 +35,7 @@ file_destination_qr = r'C:\Users\HOME\PycharmProjects\TryingNew Project\Students
 
 file_txt = r" C:\Users\HOME\PycharmProjects\TryingNew Project\Student_profiles\ "
 
+#i didn't use this function.
 def valid_email(email):
     if (re.search(regex, email)):
         print("Valid Email")
