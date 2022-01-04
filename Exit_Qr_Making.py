@@ -33,6 +33,10 @@ def check_usn(stud_usn_check):
 
     #establishing a flag to know it is active or not,active na 1.or 0
     active  = 0
+    active_db_key = ''
+
+    # creating a dict
+    stud_dict = {}
 
     for user in users.each():
         print("Came to For loop ")
@@ -42,51 +46,36 @@ def check_usn(stud_usn_check):
         stud_key_list.append(stud_key_identification)
         print(stud_key_list)
 
-
-        stud_outtime_check = db.child(stud_usn_check).child("P167RT9K9UTW").get()
+        stud_outtime_check = db.child(stud_usn_check).child(stud_key_identification).get()
         print(stud_outtime_check)
 
-        stud_db_acc_dict = {}
-
-        for stud_db_acc in stud_outtime_check.each():
-            print(stud_db_acc.key(), stud_db_acc.val())
-            if (stud_db_acc.key() == "Name"):
-                    stud_name_db = stud_db_acc.val()
-                    stud_db_acc_dict["Name"] = stud_name_db
-            elif (stud_db_acc.key() == "USN"):
-                    stud_USN_db = stud_db_acc.val()
-                    stud_db_acc_dict["USN"] = stud_USN_db
-            elif (stud_db_acc.key() == "sem"):
-                    stud_sem_db = stud_db_acc.val()
-                    stud_db_acc_dict["sem"] = stud_sem_db
-                elif (stud_db_acc.key() == "Branch"):
-                    stud_branch_db = stud_db_acc.val()
-                    stud_db_acc_dict["Branch"] = stud_branch_db
-                elif (stud_db_acc.key() == "Mobileno"):
-                    stud_mobilno_db = stud_db_acc.val()
-                    stud_db_acc_dict["Mobileno"] = stud_mobilno_db
-                elif (stud_db_acc.key() == "Out*Time"):
-                    stud_Time_db = stud_db_acc.val()
-                    stud_db_acc_dict["Out*Time"] = stud_Time_db
-                elif (stud_db_acc.key() == "reason"):
-                    stud_reason_db = stud_db_acc.val()
-                    stud_db_acc_dict["reason"] = stud_reason_db
-                elif (stud_db_acc.key() == "time*day"):
-                    stud_td_db = stud_db_acc.val()
-                    stud_db_acc_dict["time*day"] = stud_td_db
-                elif (stud_db_acc.key() == "Out*Date"):
-                    stud_date_db = stud_db_acc.val()
-                    stud_db_acc_dict["Out*Date"] = stud_date_db
-                elif (stud_db_acc.key() == "Key"):
-                    stud_key_db = stud_db_acc.val()
-                    stud_db_acc_dict["Key"] = stud_key_db
-
-
-        #need to satart code from here
-
-
-
         print("Retreived the available keys")
+
+
+        for stud_in_time in stud_outtime_check.each():
+            print(stud_in_time.key(),stud_in_time.val())
+            stud_dict[stud_in_time.key()] = stud_in_time.val()
+
+        print(stud_dict)
+        b = 'In*Time'
+        if b in stud_dict.keys():
+            print("Present")
+
+        else:
+            print("Not present")
+            active = 1
+            active_db_key = stud_dict.get("Key")
+            active_db(stud_usn_check, active_db_key)
+            
+
+
+
+
+    print(len(stud_key_list))
+    for i in range(len(stud_key_list)):
+        print(stud_key_list[i])
+
+        print("keys in list of loop")
 
 
     if(users.val() != None):
@@ -94,12 +83,14 @@ def check_usn(stud_usn_check):
         #Exitqr(stud_usn_check)
 
     else:
-        print(" OOPS Sorry U didnt make any Entry!!")
+        print(" OOPS Sorry U didn't make any Entry!!")
 
 
 def active_db(stud_fk_usn,stud_fk_key):
     print("Fked up here")
     print(stud_fk_key,stud_fk_usn)
+    #need to  satrt code from here
+    Exitqr(stud_fk_usn,stud_fk_key)
 
 
 
