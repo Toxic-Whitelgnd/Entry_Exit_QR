@@ -21,3 +21,6 @@
     #50% that is for scanning Entry(i.e is going out)
     
     #remaining 50% is Exit (i.e is Coming in) for that I have to make a software.
+
+#totaly 80% done 
+need to make some changes in Exit_QR_Scanning
