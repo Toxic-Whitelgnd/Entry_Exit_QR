@@ -22,5 +22,10 @@
     
     #remaining 50% is Exit (i.e is Coming in) for that I have to make a software.
 
-#totaly 80% done 
+#totaly 80% done - on3 jan 2022
 need to make some changes in Exit_QR_Scanning
+
+
+#totally completed 100% - on 4 jan 2022
+
+<----------------------------------------->
