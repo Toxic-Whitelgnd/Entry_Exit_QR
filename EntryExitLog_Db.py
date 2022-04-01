@@ -100,14 +100,13 @@ def scan_entry():
 
             print("Extraction Succesfull")
 
-            #Now i have email id,reason,time,outtime,outdate,name so total 5 parameters
-            SendingMailAtEntry.sendmail(stud_name,stud_email,stud_time,stud_reason,stud_Otime,stud_Odate)
-            print("Went Successfullyy!!")
-
-
-            #inserting into db
+             #inserting into db
             entry_qr_db( stud_usn,stud_key,stud_dict)
-            print("i didnt send please check after debug")
+            print("Successful Now send to email")
+
+            # Now i have email id,reason,time,outtime,outdate,name so total 5 parameters
+            SendingMailAtEntry.sendmail(stud_name, stud_email, stud_time, stud_reason, stud_Otime, stud_Odate)
+            print("Went Successfullyy!!")
 
         cv2.imshow("frames to scan QR Code",frame)
 
@@ -172,15 +171,14 @@ def scan_exit():
 
             print("Extraction Succesfull")
 
-            # Now i have email id,reason,time,outtime,outdate,name so total 5 parameters
-            SendingMailAtExit.sendmail(stud_name, stud_email, stud_time, stud_reason, stud_Otime, stud_Odate, stud_InTime1, stud_InDate)
-            print("Went Successfullyy!!")
-
-
-
             # inserting into db
             exit_qr_db(stud_usn,stud_key, stud_dict)
-            print("Remove this after sometine now i am creating!!")
+            print("Successful Now Sending to mail!!")
+
+            # Now i have email id,reason,time,outtime,outdate,name so total 5 parameters
+            SendingMailAtExit.sendmail(stud_name, stud_email, stud_time, stud_reason, stud_Otime, stud_Odate,
+                                       stud_InTime1, stud_InDate)
+            print("Went Successfullyy!!")
 
         cv2.imshow("frames to scan QR code", frame)
 
