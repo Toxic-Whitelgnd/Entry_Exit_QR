@@ -4,29 +4,35 @@ from datetime import datetime
 
 import qrcode
 
-#create seprate firebase console and add u r firebaseconfiguration
-#i removed due to Privacy Reasons
-
 firebaseConfig = {
-    'apiKey': "",
-    'authDomain': "",
-    'projectId': "",
-    'storageBucket': "",
-    'messagingSenderId': "",
-    'appId': "",
-    'measurementId': "",
-    'databaseURL':""
+     'apiKey': "AIzaSyBFidAWIw-UggFx49xbXLunkXW5-_c1Ywo",
+  'authDomain': "entryexittagglogdb.firebaseapp.com",
+  'projectId': "entryexittagglogdb",
+  'storageBucket': "entryexittagglogdb.appspot.com",
+  'messagingSenderId': "898361353579",
+  'appId': "1:898361353579:web:924cc29e68e3522c80d82e",
+  'measurementId': "G-PWFZBQG312",
+    'databaseURL':'https://entryexittagglogdb-default-rtdb.firebaseio.com'
 }
 
 firebase = pyrebase.initialize_app(firebaseConfig)
 
 db = firebase.database()
 
+made = 0
 
 print("Checking for any ActiveStatus in Database!!")
 #create a function to check the active status available or not
 #retrive all usn and check witht he usn by usnig some functions
 #and pass to Exitqe
+def intial_usn_check(stud_usn_check1):
+    print("Dfgdf")
+    try:
+        check_usn(stud_usn_check1)
+    except:
+        print("Sorry In Databse You Haven't Made Any Entry!! Try Making Any Entry ;]")
+
+
 def check_usn(stud_usn_check):
     users = db.child(stud_usn_check).get()
     print(users.val())
@@ -56,7 +62,7 @@ def check_usn(stud_usn_check):
 
 
         for stud_in_time in stud_outtime_check.each():
-            print(stud_in_time.key(),stud_in_time.val())
+          #  print(stud_in_time.key(),stud_in_time.val())
             stud_dict[stud_in_time.key()] = stud_in_time.val()
 
         print(stud_dict)
@@ -89,52 +95,59 @@ def inactive_db():
 
 
 
-def Exitqr(stud_usn,stud_key):
-    print("Entered here")
-    print(stud_usn)
-    stud_details = db.child(stud_usn).child(stud_key).get()
+def Exitqr(stud_usn, stud_key):
+        print("Entered here")
+        print(stud_usn)
+        made = 0
+        stud_details = db.child(stud_usn).child(stud_key).get()
 
-    stud_db_acc_dict = {}
+        stud_db_acc_dict = {}
 
-    try:
-        for stud_db_acc in stud_details.each():
-            print(stud_db_acc.key(),stud_db_acc.val())
-            if (stud_db_acc.key() == "Name"):
-                stud_name_db = stud_db_acc.val()
-                stud_db_acc_dict["Name"] = stud_name_db
-            elif (stud_db_acc.key() == "USN"):
-                stud_USN_db = stud_db_acc.val()
-                stud_db_acc_dict["USN"] = stud_USN_db
-            elif (stud_db_acc.key() == "sem"):
-                stud_sem_db = stud_db_acc.val()
-                stud_db_acc_dict["sem"] = stud_sem_db
-            elif (stud_db_acc.key() == "Branch"):
-                stud_branch_db = stud_db_acc.val()
-                stud_db_acc_dict["Branch"] = stud_branch_db
-            elif (stud_db_acc.key() == "Mobileno"):
-                stud_mobilno_db = stud_db_acc.val()
-                stud_db_acc_dict["Mobileno"] = stud_mobilno_db
-            elif (stud_db_acc.key() == "Out*Time"):
-                stud_Time_db = stud_db_acc.val()
-                stud_db_acc_dict["Out*Time"] = stud_Time_db
-            elif (stud_db_acc.key() == "reason"):
-                stud_reason_db = stud_db_acc.val()
-                stud_db_acc_dict["reason"] = stud_reason_db
-            elif (stud_db_acc.key() == "time*day"):
-                stud_td_db = stud_db_acc.val()
-                stud_db_acc_dict["time*day"] = stud_td_db
-            elif (stud_db_acc.key() == "Out*Date"):
-                stud_date_db = stud_db_acc.val()
-                stud_db_acc_dict["Out*Date"] = stud_date_db
-            elif (stud_db_acc.key() == "Key"):
-                stud_key_db = stud_db_acc.val()
-                stud_db_acc_dict["Key"] = stud_key_db
+        try:
+            for stud_db_acc in stud_details.each():
+                print(stud_db_acc.key(),stud_db_acc.val())
+                if (stud_db_acc.key() == "Name"):
+                    stud_name_db = stud_db_acc.val()
+                    stud_db_acc_dict["Name"] = stud_name_db
+                elif (stud_db_acc.key() == "USN"):
+                    stud_USN_db = stud_db_acc.val()
+                    stud_db_acc_dict["USN"] = stud_USN_db
+                elif (stud_db_acc.key() == "sem"):
+                    stud_sem_db = stud_db_acc.val()
+                    stud_db_acc_dict["sem"] = stud_sem_db
+                elif (stud_db_acc.key() == "Branch"):
+                    stud_branch_db = stud_db_acc.val()
+                    stud_db_acc_dict["Branch"] = stud_branch_db
+                elif (stud_db_acc.key() == "Mobileno"):
+                    stud_mobilno_db = stud_db_acc.val()
+                    stud_db_acc_dict["Mobileno"] = stud_mobilno_db
+                elif (stud_db_acc.key() == "Out*Time"):
+                    stud_Time_db = stud_db_acc.val()
+                    stud_db_acc_dict["Out*Time"] = stud_Time_db
+                elif (stud_db_acc.key() == "reason"):
+                    stud_reason_db = stud_db_acc.val()
+                    stud_db_acc_dict["reason"] = stud_reason_db
+                elif (stud_db_acc.key() == "time*day"):
+                    stud_td_db = stud_db_acc.val()
+                    stud_db_acc_dict["time*day"] = stud_td_db
+                elif (stud_db_acc.key() == "Out*Date"):
+                    stud_date_db = stud_db_acc.val()
+                    stud_db_acc_dict["Out*Date"] = stud_date_db
+                elif (stud_db_acc.key() == "Key"):
+                    stud_key_db = stud_db_acc.val()
+                    stud_db_acc_dict["Key"] = stud_key_db
+                elif (stud_db_acc.key() == "emailid"):
+                    stud_emailid = stud_db_acc.val()
+                    stud_db_acc_dict["emailid"] = stud_emailid
+                    print("email mff:"+stud_emailid)
+        except:
+            print("Retreving finished")
 
         # getting date and time when they logged in
         stud_time = datetime.today().strftime("%H:%M:%S %p")
         print(stud_time)
         now = datetime.now()
-        stud_date = now.strftime("%y-%m-%d")
+        stud_date = now.strftime("%d-%m-%y")
         print(stud_date)
 
         # adding the date and time to dictionary
@@ -150,11 +163,12 @@ def Exitqr(stud_usn,stud_key):
         stud_qr_random.add_data(stud_db_acc_dict)
         stud_qr_random.make(fit=True)
         stud_qrrr = stud_qr_random.make_image(fill_color='black', back_color='blue')
-        stud_QR = stud_qrrr.save(r'C:\Users\HOME\PycharmProjects\TryingNew Project\Students_generated_qrcodes\Exit.png')
+        stud_QR = stud_qrrr.save(r'D:\\PyCharm\\PycharmProjects\\EntryExit_QR\\Students_generated_qrcodes\\exit.jpg')
         print("Random Exit QR had made successfully")
 
-    except:
-        print("OOPS! Sorry u didn't Make any Entry Log!!")
+
+    # except:
+    #     print("OOPS! Sorry u didn't Make any Entry Log!!")
 
 
 #need to generate a random key after usn.

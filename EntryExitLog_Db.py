@@ -1,25 +1,20 @@
 #this is from other side for scanning purpose for entry andd exit
-import time
 
-import pyrebase,json,ast
+import SendingMailAtExit
+import pyrebase, ast
 import cv2
 import pyzbar.pyzbar as pyzbars
-from datetime import datetime
-from PIL import Image
-import numpy as np
-
-#create seprate firebase console and add u r firebaseconfiguration
-#i removed due to Privacy Reasons
+import SendingMailAtEntry
 
 firebaseConfig = {
-    'apiKey': "",
-    'authDomain': "",
-    'projectId': "",
-    'storageBucket': "",
-    'messagingSenderId': "",
-    'appId': "",
-    'measurementId': "",
-    'databaseURL':""
+    'apiKey': "AIzaSyBFidAWIw-UggFx49xbXLunkXW5-_c1Ywo",
+  'authDomain': "entryexittagglogdb.firebaseapp.com",
+  'projectId': "entryexittagglogdb",
+  'storageBucket': "entryexittagglogdb.appspot.com",
+  'messagingSenderId': "898361353579",
+  'appId': "1:898361353579:web:924cc29e68e3522c80d82e",
+  'measurementId': "G-PWFZBQG312",
+    'databaseURL':'https://entryexittagglogdb-default-rtdb.firebaseio.com'
 }
 
 firebase = pyrebase.initialize_app(firebaseConfig)
@@ -68,9 +63,11 @@ def scan_entry():
 
 
             #converting to dict
-            stud_dict = ast.literal_eval(str1)
+            stud_dict = ast.literal_eval(str1) #ast is a converter
             print("the converted dict is :"+str(stud_dict))
             print(type(stud_dict))
+
+            print()
 
 
 
@@ -83,10 +80,34 @@ def scan_entry():
             print(stud_dict.get("Key"))
             stud_key = stud_dict.get("Key")
 
-            #need to enter the current time for outgoing time
+
+            #This is Seprate for Sending to the User about their report of Exiting!!
+            #extracting the email
+            print(stud_dict.get("emailid"))
+            stud_email = stud_dict.get("emailid")
+
+            #Extracting the Reason Time
+            print(stud_dict.get("reason"))
+            stud_reason = stud_dict.get("reason")
+            #Extracting the Time
+            stud_time = stud_dict.get("time*day")
+            #Extracting when they went out time
+            stud_Odate = stud_dict.get("Out*Date")
+            #Extracting the out date
+            stud_Otime = stud_dict.get("Out*Time")
+            #Extract Name
+            stud_name = stud_dict.get("Name")
+
+            print("Extraction Succesfull")
+
+            #Now i have email id,reason,time,outtime,outdate,name so total 5 parameters
+            SendingMailAtEntry.sendmail(stud_name,stud_email,stud_time,stud_reason,stud_Otime,stud_Odate)
+            print("Went Successfullyy!!")
+
 
             #inserting into db
             entry_qr_db( stud_usn,stud_key,stud_dict)
+            print("i didnt send please check after debug")
 
         cv2.imshow("frames to scan QR Code",frame)
 
@@ -128,10 +149,38 @@ def scan_exit():
             print(stud_dict.get("Key"))
             stud_key = stud_dict.get("Key")
 
-            # need to enter the current time for outgoing time
+            # This is Seprate for Sending to the User about their report of Exiting!!
+            # extracting the email
+            print(stud_dict.get("emailid"))
+            stud_email = stud_dict.get("emailid")
+
+            # Extracting the Reason Time
+            print(stud_dict.get("reason"))
+            stud_reason = stud_dict.get("reason")
+            # Extracting the Time
+            stud_time = stud_dict.get("time*day")
+            # Extracting when they went out time
+            stud_Odate = stud_dict.get("Out*Date")
+            # Extracting the out date
+            stud_Otime = stud_dict.get("Out*Time")
+            # Extract Name
+            stud_name = stud_dict.get("Name")
+            #Extracting the in time
+            stud_InTime1 = stud_dict.get("In*Time")
+            #Extracting the in date
+            stud_InDate = stud_dict.get("In*Date")
+
+            print("Extraction Succesfull")
+
+            # Now i have email id,reason,time,outtime,outdate,name so total 5 parameters
+            SendingMailAtExit.sendmail(stud_name, stud_email, stud_time, stud_reason, stud_Otime, stud_Odate, stud_InTime1, stud_InDate)
+            print("Went Successfullyy!!")
+
+
 
             # inserting into db
             exit_qr_db(stud_usn,stud_key, stud_dict)
+            print("Remove this after sometine now i am creating!!")
 
         cv2.imshow("frames to scan QR code", frame)
 

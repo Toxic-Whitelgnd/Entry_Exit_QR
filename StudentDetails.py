@@ -1,27 +1,28 @@
 #this is for student purpose for crwating qr code while going out and coming in.
 
-import re,os,shutil
-import pyrebase
-import qrcode
-import string
+import os
 import random
+import re
+import shutil
+import string
 from pathlib import Path
-from datetime import datetime, time
+import qrcode,image
+
+
 from Exit_Qr_Making import *
 
 regex = '^[a-z0-9]+[\._]?[ a-z0-9]+[@]\w+[. ]\w{2,3}$'
-#create seprate firebase console and add u r firebaseconfiguration
-#i removed due to Privacy Reasons
+
 
 firebaseConfig = {
-    'apiKey': "",
-    'authDomain': "",
-    'projectId': "",
-    'storageBucket': "",
-    'messagingSenderId': "",
-    'appId': "",
-    'measurementId': "",
-    'databaseURL':""
+'apiKey': "AIzaSyBXHtKztH7seF8qciW-G8CfpC013pBir48",
+  'authDomain': "entryexittag.firebaseapp.com",
+  'databaseURL': "https://entryexittag-default-rtdb.firebaseio.com",
+  'projectId': "entryexittag",
+  'storageBucket': "entryexittag.appspot.com",
+  'messagingSenderId': "34693254962",
+  'appId': "1:34693254962:web:a13cc27de7304a8fc1912b",
+  'measurementId': "G-RWTCEVDJWR"
 }
 firebase = pyrebase.initialize_app(firebaseConfig)
 
@@ -29,13 +30,14 @@ db = firebase.database()
 
 stud_usn_temp = ''
 
-file_source = r'C:\Users\HOME\PycharmProjects\TryingNew Project'
-file_destination_txt = r'C:/Users/HOME/PycharmProjects/TryingNew Project/Student_profiles'
-file_destination_qr = r'C:\Users\HOME\PycharmProjects\TryingNew Project\Students_generated_qrcodes'
+#need to edit this path
+file_source = r'D:\\PyCharm\\PycharmProjects\\EntryExit_QR\\'
+file_destination_txt = r'D:\\PyCharm\\PycharmProjects\\EntryExit_QR\\Student_profiles'
+file_destination_qr = r'D:\PyCharm\PycharmProjects\ExitEntry_QR\Students_generated_qrcodes'
+qr_imge = r'D:\\PyCharm\\PycharmProjects\\EntryExit_QR\\Students_generated_qrcodes\\entry.jpg'
 
-file_txt = r" C:\Users\HOME\PycharmProjects\TryingNew Project\Student_profiles\ "
+file_txt = r" Student_profiles\ "
 
-#i didn't use this function.
 def valid_email(email):
     if (re.search(regex, email)):
         print("Valid Email")
@@ -58,16 +60,19 @@ def student_profile():
 
     # this part will be in reteriving from db or it will store in mobile memory like login or something
     #need to do like a pro ,import os and extract the txt file
-    for root, dirs, files in os.walk(r'C:\Users\HOME\PycharmProjects\TryingNew Project\Student_profiles'):
+    for root, dirs, files in os.walk(r'D:\\PyCharm\\PycharmProjects\\EntryExit_QR\\Student_profiles'):
+        print("Available profiles!")
         for file in files:
+
             if file.endswith('.txt'):
                 print(os.path.join(file))
                 transfer_file = os.path.join(file)
+
         print("<--------------------------->")
 
     ch = input("Enter the file name:")
 
-    with open(file_destination_txt+r'/'+ch,'r')  as f:
+    with open(file_destination_txt+r'\\'+ch,'r')  as f:
         a = f.read()
 
     print("values inside the file:"+str(a))
@@ -108,6 +113,9 @@ def student_profile():
         elif (stud_db_acc.key() == "Mobileno"):
             stud_mobilno_db = stud_db_acc.val()
             stud_db_acc_dict["Mobileno"] = stud_mobilno_db
+        elif(stud_db_acc.key() == "emailid"):
+            stud_emailid_db = stud_db_acc.val()
+            stud_db_acc_dict["emailid"] = stud_emailid_db
 
     print(stud_db_acc_dict)
 
@@ -147,6 +155,7 @@ def student_profile():
         print("The randomly generated string is : " + str(ran))
 
 
+
         stud_db_acc_dict["Key"] = ran
 
         print(stud_db_acc_dict)
@@ -164,7 +173,7 @@ def student_profile():
         stud_qr_random.add_data(stud_db_acc_dict)
         stud_qr_random.make(fit=True)
         stud_qrrr=stud_qr_random.make_image(fill_color='black',back_color='blue')
-        stud_QR=stud_qrrr.save(r'C:\Users\HOME\PycharmProjects\TryingNew Project\Students_generated_qrcodes\Entry.png')
+        stud_QR=stud_qrrr.save(qr_imge)
         print("Random QR had made successfully")
 
         # for file in Path(file_source).glob(stud_QR):
@@ -177,7 +186,8 @@ def student_profile():
 
     else:
         print("Entered in Exit_Qr")
-        check_usn(stud_id_usn)
+        print(stud_id_usn)
+        intial_usn_check(stud_id_usn)
         #Exitqr(stud_id_usn)
 
 def student_details():
@@ -246,3 +256,11 @@ def student_details():
 
 home_page()
 
+''''apiKey': "AIzaSyBXHtKztH7seF8qciW-G8CfpC013pBir48",
+  'authDomain': "entryexittag.firebaseapp.com",
+  'databaseURL': "https://entryexittag-default-rtdb.firebaseio.com",
+  'projectId': "entryexittag",
+  'storageBucket': "entryexittag.appspot.com",
+  'messagingSenderId': "34693254962",
+  'appId': "1:34693254962:web:a13cc27de7304a8fc1912b",
+  'measurementId': "G-RWTCEVDJWR"'''

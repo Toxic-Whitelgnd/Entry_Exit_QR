@@ -3,6 +3,8 @@
 #if we scan it will connect to databse and store our details with time.
 #for exit it will scan another qr code  and it will store it in the database with close time.
 
+import math
+
 #
 # a = "20btrca23"
 # b = a.split('20')
@@ -149,14 +151,30 @@ for users in user.each():
         # #need to satart code from here
         # print("active:"+str(active))
 
-a = {
-    'name':'adfsdf',
-    'in*time':'2432wr',
-    'usn':'sfgdsdfe'
-}
+# a = {
+#     'name':'adfsdf',
+#     'in*time':'2432wr',
+#     'usn':'sfgdsdfe'
+# }
+#
+# b = 'in*time'
+# if b in a.keys():
+#     print("present")
+# else:
+#     print("Not present")
 
-b = 'in*time'
-if b in a.keys():
-    print("present")
-else:
-    print("Not present")
+# x,y = input("Enter a Red Gem and Blue Gem:").split()
+# print(x,y)
+#
+# if(int(x) >100 or  int(y) > 100 ):
+#     exit()
+# else:
+#     if (x == y):
+#         print("YES")
+#     else:
+#         print("NO")
+
+
+print(floor(10))
+
+
