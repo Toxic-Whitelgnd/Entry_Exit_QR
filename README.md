@@ -1,3 +1,7 @@
+Students leave and enter institutions, which is only recorded in books, thus we developed software that allows businesses to view their data in a firebase of student entry and exit utilising phython.
+
+
+
 # Entry_Exit_QR
 
 #run the Studentdetails 
