@@ -17,3 +17,6 @@ Students leave and enter institutions, which is only recorded in books, thus we 
 #Newly Added
         ->When u done a Entry Scan or Exit Scan u will get a Mail to u r email
         
+$To see the result
+        ->Check the website:https://toxic-whitelgnd.github.io/entryexitweb-deploy/
+        
